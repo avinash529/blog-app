@@ -9,7 +9,17 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $viewedBlogIds = \App\Models\UserBlogView::where('user_id', auth()->id())
+                        ->distinct('blog_id')
+                        ->pluck('blog_id');
+    
+    $viewed = $viewedBlogIds->count();
+    $total = \App\Models\Blog::count();
+    $new = \App\Models\Blog::whereNotIn('id', $viewedBlogIds)->count();
+    
+    $recentBlogs = \App\Models\Blog::latest()->take(5)->get();
+    
+    return view('dashboard', compact('total', 'viewed', 'new', 'recentBlogs'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
