@@ -13,7 +13,8 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Outfit', 'sans-serif', ...defaultTheme.fontFamily.sans],
+                sans: ['Bricolage Grotesque', 'Outfit', ...defaultTheme.fontFamily.sans],
+                display: ['Playfair Display', 'serif'],
             },
             colors: {
                 primary: {
