@@ -17,7 +17,7 @@ Route::get('/dashboard', function () {
     $total = \App\Models\Blog::count();
     $new = \App\Models\Blog::whereNotIn('id', $viewedBlogIds)->count();
     
-    $recentBlogs = \App\Models\Blog::latest()->take(5)->get();
+    $recentBlogs = \App\Models\Blog::latest()->get();
     
     return view('dashboard', compact('total', 'viewed', 'new', 'recentBlogs'));
 })->middleware(['auth', 'verified'])->name('dashboard');
